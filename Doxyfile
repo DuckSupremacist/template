@@ -1,0 +1,44 @@
+# Doxyfile
+
+# Generate HTML output
+GENERATE_HTML = YES
+HTML_OUTPUT = html
+
+# Disable outputs that we don't need
+GENERATE_LATEX = NO
+GENERATE_XML = NO
+GENERATE_RTF = NO
+GENERATE_MAN = NO
+GENERATE_DOCBOOK = NO
+
+# Directories to search for input files
+INPUT = ./include ./src
+# Patterns to filter the files to process
+FILE_PATTERNS = *.h *.hpp *.c *.cpp
+# Recurse into subdirectories
+RECURSIVE = YES
+
+# Log file for warnings
+WARN_LOGFILE = doxygen_warnings.log
+
+# Enable warnings for undocumented members
+WARN_NO_PARAMDOC = YES
+WARN_NO_RETURN = YES
+WARNINGS = YES
+WARN_IF_UNDOCUMENTED = YES
+WARN_IF_DOC_ERROR = YES
+# Exclude symbols with the following names
+EXCLUDE_SYMBOLS   = "__attribute__"
+
+# Show members and methods in the hierarchy tab
+SHOW_USED_FILES = YES
+SHOW_FILES = YES
+SHOW_NAMESPACES = YES
+
+# Additional settings to improve the documentation output
+FULL_PATH_NAMES = YES
+STRIP_FROM_PATH =
+INLINE_SOURCES = YES
+SOURCE_BROWSER = YES
+REFERENCES_RELATION = YES
+REFERENCES_LINK_SOURCE = YES

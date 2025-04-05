@@ -1,0 +1,111 @@
+Checks: >
+  -*,
+
+  mpi-*,
+
+  bugprone-*,
+  -bugprone-easily-swappable-parameters,
+  -bugprone-unchecked-optional-access,
+
+  cert-err52-cpp,
+  cert-err60-cpp,
+  cert-err34-c,
+  cert-str34-c,
+  cert-msc50-cpp,
+  cert-msc51-cpp,
+  cert-dcl58-cpp,
+  cert-flp30-c,
+
+  cppcoreguidelines-no-malloc,
+  cppcoreguidelines-macro-usage,
+  cppcoreguidelines-pro-type-member-init,
+  cppcoreguidelines-slicing,
+  cppcoreguidelines-interfaces-global-init,
+  cppcoreguidelines-pro-type-static-cast-downcast,
+  cppcoreguidelines-narrowing-conversions,
+
+  google-runtime-operator,
+  google-explicit-constructor,
+  google-readability-avoid-underscore-in-googletest-name,
+
+  hicpp-multiway-paths-covered,
+  hicpp-exception-baseclass,
+
+  llvm-include-order,
+  llvm-else-after-return,
+
+  misc-unconventional-assign-operator,
+  misc-misplaced-const,
+  misc-new-delete-overloads,
+  misc-non-copyable-objects,
+  misc-no-recursion,
+  misc-throw-by-value-catch-by-reference,
+  misc-uniqueptr-reset-release,
+
+  modernize-*,
+  -modernize-use-trailing-return-type,
+  -modernize-avoid-c-arrays,
+  -modernize-use-constraints,
+  -modernize-use-std-numbers,
+  -modernize-type-traits,
+  -modernize-use-std-print,
+  -modernize-use-using,
+  -modernize-use-default-member-init,
+  -modernize-use-auto,
+  -modernize-use-starts-ends-with,
+  -modernize-macro-to-enum,
+
+  performance-*,
+  -performance-noexcept-swap,
+  -performance-noexcept-destructor,
+  -performance-enum-size,
+  -performance-avoid-endl,
+
+  readability-magic-numbers,
+  readability-convert-member-functions-to-static,
+  readability-identifier-naming,
+  readability-redundant-smartptr-get,
+  readability-make-member-function-const,
+  readability-string-compare,
+  readability-delete-null-pointer,
+  readability-static-accessed-through-instance,
+  readability-redundant-function-ptr-dereference,
+  readability-const-return-type,
+  readability-misleading-indentation,
+  readability-non-const-parameter,
+  readability-redundant-string-cstr,
+  readability-use-anyofallof,
+  readability-simplify-subscript-expr,
+  readability-uniqueptr-delete-release,
+  readability-static-definition-in-anonymous-namespace,
+  readability-redundant-declaration,
+  readability-redundant-string-init,
+  readability-redundant-control-flow,
+  readability-misplaced-array-index,
+  readability-inconsistent-declaration-parameter-name,
+  readability-container-size-empty,
+
+WarningsAsErrors: "*"
+CheckOptions:
+  - key: performance-unnecessary-value-param.AllowedTypes
+    value: 'std::shared_ptr'
+  - key: readability-identifier-naming.VariableCase # e.g., int my_variable;
+    value: lower_case
+  - key: readability-identifier-naming.PrivateMemberPrefix # e.g., private: int MyClass::_my_variable;
+    value: '_'
+  - key: readability-identifier-naming.ClassMemberPrefix # e.g., private: static int MyClass::_my_variable;
+    value: '_'
+  - key: readability-identifier-naming.PrivateMemberIgnoredRegexp # e.g., Ignore private const variables
+    value: '[A-Z_\d]+'
+  - key: readability-identifier-naming.ClassCase # e.g., class MyClass;
+    value: CamelCase
+  - key: readability-identifier-naming.FunctionCase # e.g., void myFunction();
+    value: camelBack
+  - key: readability-identifier-naming.ConstexprVariableCase # e.g., constexpr int MY_CONSTANT = 42;
+    value: UPPER_CASE
+  - key: readability-identifier-naming.GlobalConstantCase # e.g., const int MY_CONSTANT 42
+    value: UPPER_CASE
+  - key: readability-identifier-naming.MacroDefinitionCase # e.g., #define MY_MACRO 42
+    value: UPPER_CASE
+  - key: readability-identifier-naming.ParameterCase # e.g., void myFunction(int my_parameter);
+    value: lower_case

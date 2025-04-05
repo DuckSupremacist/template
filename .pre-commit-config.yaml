@@ -1,0 +1,99 @@
+repos:
+  - repo: https://github.com/cheshirekow/cmake-format-precommit
+    rev: v0.6.13
+    hooks:
+      - id: cmake-format
+        entry: |-
+          bash -c '
+            if [[ -n "$@" ]]; then
+              echo "$@" | xargs -n1 \
+                cmake-format \
+                  --in-place \
+                  --line-width=120 \
+                  --tab-size=4 \
+                  --line-ending=unix \
+                  --max-subgroups-hwrap=2 \
+                  --max-pargs-hwrap=1 \
+                  --dangle-parens=TRUE \
+                  --enable-sort=TRUE \
+                  --autosort=TRUE
+            fi
+          '
+
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v20.1.0
+    hooks:
+      - id: clang-format
+        args:
+          - -i
+          - "-style={
+              BasedOnStyle: LLVM,
+              ColumnLimit: 120,
+              IndentWidth: 4,
+              AlignAfterOpenBracket: BlockIndent,
+              BreakBeforeBraces: Custom,
+              BraceWrapping:
+              {
+                AfterClass: true,
+                AfterEnum: true,
+                AfterNamespace: true,
+                AfterStruct: true,
+                AfterUnion: true,
+                BeforeCatch: true,
+                BeforeElse: true,
+                IndentBraces: false,
+                SplitEmptyFunction: false,
+                SplitEmptyRecord: false,
+              },
+              PointerAlignment: Left,
+              BinPackParameters: false
+            }"
+
+  - repo: local
+    hooks:
+      - id: doxygen-check
+        name: doxygen-check
+        entry: ./doxygen.sh ./Doxyfile
+        language: system
+        pass_filenames: false
+        always_run: true
+
+  - repo: local
+    hooks:
+      - id: check-filenames
+        name: Check filenames are snake_case
+        entry: bash -c 'for file in "$@"; do basename "$file" | grep -qE "^[a-z0-9_]+(\.test)?\.(h|cpp)$" || { echo "$file is not snake_case"; exit 1; }; done'
+        language: system
+        files: \.(h|cpp)$
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-case-conflict
+
+  - repo: https://github.com/pocc/pre-commit-hooks
+    rev: v1.3.5
+    hooks:
+      - id: clang-tidy
+        entry: |-
+          bash -c '
+            if [[ -n "$@" ]]; then
+              for file in "$@"; do
+                clang-tidy \
+                  --quiet \
+                  "$file" \
+                  -- \
+                  -Wall \
+                  -std=c++20 \
+                  -x c++ \
+                  -Iinclude \
+                  -Itests/include \
+                  -Ibuild/include \
+                  -I/usr/local/include/thc/ \
+                  -I/usr/local/include/alb/
+
+              done
+            fi
+          '
